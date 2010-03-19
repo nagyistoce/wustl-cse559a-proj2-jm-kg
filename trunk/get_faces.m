@@ -13,7 +13,9 @@ files = dir(directory);
 sz    = size(files,1);
 
 for i=1 : 1:sz
-    if (files(i).isdir && ~(strcmp(files(i).name,'.') || strcmp(files(i).name,'..')))
+    if (files(i).isdir && ~(strcmp(files(i).name,'.') || ...
+            strcmp(files(i).name,'..') || ...
+            strcmp(files(i).name,'.svn')))
         newdir = sprintf('%s/%s', directory, files(i).name);
         % recurse into directory and get additional images and add columns
         % to end
@@ -23,7 +25,7 @@ for i=1 : 1:sz
     else
         if (strfind(files(i).name, '.pgm'))
             file = sprintf('%s/%s', directory, files(i).name);
-            numimages = numimages + 1;
+            numimages = numimages + 1;            
             im = imread(file);
             % add new image to new column in images
             images(:,numimages) = im(:);
