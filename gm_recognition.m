@@ -1,7 +1,7 @@
 % PCA Face Recognition
 % Kurt Glastetter and Josh Mason
 
-function rmatrix = gm_recognition(tfmatrix, fmean, U, V, tfiles, origfiles, k)
+function [rmatrix nnghbors] = gm_recognition(tfmatrix, fmean, U, V, tfiles, origfiles, k)
 
 % get number of faces to recognize
 sz = size(tfmatrix,2);
@@ -25,6 +25,9 @@ for i=1:1:sz
     curMax = 0;
     maxSubj = '';
 
+    % save off nearest neighbors (mainly for debugging)
+    nnghbors(i,:) = [tfiles(i) nn];
+    
     % count how many times each neighbor appears
     for j=1:nnsize
         subname = get_subjectname(char(nn(j)));

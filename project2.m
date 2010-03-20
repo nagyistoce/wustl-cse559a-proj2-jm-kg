@@ -17,7 +17,7 @@ clear;
 
 %% do recognition and get back recognition matrix
 % the last number specifies the k value for knn
-rmatrix = gm_recognition(tfmatrix, fmean, U, V, tnames, names, 1);
+[rmatrix nn] = gm_recognition(tfmatrix, fmean, U, V, tnames, names, 3);
 
 %% calculate results
 [results right wrong] = calc_results(rmatrix);
