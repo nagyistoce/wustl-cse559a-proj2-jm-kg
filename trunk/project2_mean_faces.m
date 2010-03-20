@@ -27,7 +27,7 @@ end
 %% read in test faces
 [tfmatrix,tnames] = get_faces('test_faces');
 
-rmatrix = zeros(size(subjects,2),2);
+rmatrix = [];
 
 for ix=1:size(tfmatrix,2)
 
@@ -38,7 +38,12 @@ for ix=1:size(tfmatrix,2)
 
     [c index] = min(distancesSquared);
 
-    rmatrix(ix,:) = [subjects(ix) subjects(index)];
+    true_subject = subjects(ix);
+    found_subject = subjects(index);
+
+    true_subject = sprintf('orl_faces/%s/', true_subject{1});
+    found_subject = sprintf('test_faces/%s/', found_subject{1});
+    rmatrix = [rmatrix; {true_subject, found_subject}];
 
 end
 
