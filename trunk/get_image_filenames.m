@@ -10,8 +10,8 @@ image_filenames = {};
 files = dir(directory);
 
 for i=1:size(files,1)
-    if ~files(i).isdir && (isempty(regexpi(files(i).name, '\.pgm$')) || ...
-                           isempty(regexpi(files(i).name, '\.jpg$')))
+    if ~files(i).isdir && (~isempty(regexpi(files(i).name, '\.pgm$')) || ...
+                           ~isempty(regexpi(files(i).name, '\.jpg$')))
 
         image_filenames{size(image_filenames,2) + 1} = files(i).name;
 
