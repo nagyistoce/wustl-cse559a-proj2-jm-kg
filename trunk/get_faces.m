@@ -4,7 +4,7 @@
 %% read in face database from disk
 % numimages is used when recursively calling this function, don't pass
 % it as a param.
-function [images,filenames] = get_faces(directory,edgepp)
+function [images,filenames] = get_faces(directory,preprocess)
 numimages = 0;
 images    = [];
 filenames = {};
@@ -13,7 +13,7 @@ files = dir(directory);
 sz    = size(files,1);
 
 if (nargin == 1)
-   edgepp = 0; 
+   preprocess = 0; 
 end
 
 for i=1 : 1:sz
@@ -23,7 +23,7 @@ for i=1 : 1:sz
         newdir = sprintf('%s/%s', directory, files(i).name);
         % recurse into directory and get additional images and add columns
         % to end
-        [newimages,newfilenames] = get_faces(newdir,edgepp);
+        [newimages,newfilenames] = get_faces(newdir,preprocess);
         images = [images,newimages];
         filenames = [filenames,newfilenames];
     else
@@ -33,11 +33,11 @@ for i=1 : 1:sz
             im = imread(file);
             
             % check if pre-processing needs to occur
-            if (edgepp == 1)
+            if (preprocess == 1)
                % instead of just using an edge map, we overlay the edge
                % map onto the original image.
-               em = edge(im,'canny');
-               im(em) = 255;
+               %em = edge(im,'canny');
+               %im(em) = 255;
                
                % regular edge detection..
                %im = edge(im,'canny');
@@ -49,8 +49,11 @@ for i=1 : 1:sz
                %h = fspecial('log');
                %im = imfilter(im,h);
                
-              % imshow(im)
-              % pause
+               % histogram equalization
+               im = histeq(im);
+               
+              %imshow(im)
+              %pause
             end
             
             % add new image to new column in images
