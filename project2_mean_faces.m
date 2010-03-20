@@ -1,4 +1,4 @@
-% PCA Face Recognition
+% Mean Face Recognition
 % Kurt Glastetter and Josh Mason
 
 subjects = keys(get_subjects('orl_faces'));
@@ -12,8 +12,8 @@ for ix=1:size(subjects,2)
     subject = subject{1};
     [fmatrix,names] = get_faces(sprintf('orl_faces/%s', subject));
 
-    %% perform PCA
-    [fmean U S V] = gm_pca(fmatrix,30);
+    % get mean face (grrr)
+    fmean = mean(fmatrix,2);
 
     %% show mean face
     %meanim = reshape(fmean,112,92);
