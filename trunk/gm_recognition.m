@@ -24,7 +24,7 @@ for i=1:1:sz
     % project test image onto U matrix
     v = U'*W;
     
-    % calculate euclidian distance W's coeffs (v) to basis image's coeffs (V)
+    % calculate euclidian distance W's coeffs (v) to "orig" image's coeffs (V)
     d = sqrt(sum(abs(V' - repmat(v, [1 size(V,1)])).^2, 1));
     [c index] = min(d);
     
