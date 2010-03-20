@@ -27,7 +27,8 @@ for i=1 : 1:sz
         images = [images,newimages];
         filenames = [filenames,newfilenames];
     else
-        if (strfind(files(i).name, '.pgm'))
+        if (~isempty(strfind(files(i).name, '.pgm')) || ...
+                ~isempty(strfind(files(i).name, '.jpg')))
             file = sprintf('%s/%s', directory, files(i).name);
             numimages = numimages + 1;            
             im = imread(file);
