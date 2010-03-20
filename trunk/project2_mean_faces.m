@@ -27,7 +27,7 @@ end
 %% read in test faces
 [tfmatrix,tnames] = get_faces('test_faces');
 
-indexes = [];
+rmatrix = zeros(size(subjects,2),2);
 
 for ix=1:size(tfmatrix,2)
 
@@ -38,8 +38,12 @@ for ix=1:size(tfmatrix,2)
 
     [c index] = min(distancesSquared);
 
-    indexes = [indexes; index];
+    rmatrix(ix,:) = [subjects(ix) subjects(index)];
 
 end
 
-indexes
+%% calculate results
+[results right wrong] = calc_results(rmatrix);
+
+% dump num right/wrong to screen
+[right wrong]
