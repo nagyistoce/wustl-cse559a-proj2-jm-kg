@@ -3,7 +3,7 @@
 
 %% returns a cell array containing the names of all the image files in the
 %% specified directory
-function image_filenames = get_image_filenames(directory)
+function image_filenames = get_image_filepaths(directory)
 
 image_filenames = {};
 
