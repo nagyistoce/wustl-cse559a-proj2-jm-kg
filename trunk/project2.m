@@ -6,7 +6,7 @@ clear;
 [fmatrix,names] = get_faces('orl_faces');
 
 %% perform PCA
-[fmean U S V] = gm_pca(fmatrix);
+[fmean U S V] = gm_pca(fmatrix, 30);
 
 % show mean face
 %meanim = reshape(fmean,112,92);
@@ -17,3 +17,5 @@ clear;
 
 %% do recognition and get back recognition matrix
 rmatrix = gm_recognition(tfmatrix, fmean, U, V, tnames, names);
+
+
