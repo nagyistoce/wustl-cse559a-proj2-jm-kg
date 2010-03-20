@@ -2,8 +2,6 @@
 % Kurt Glastetter and Josh Mason
 
 %% read in face database from disk
-% numimages is used when recursively calling this function, don't pass
-% it as a param.
 function [images,filenames] = get_faces(directory,preprocess)
 numimages = 0;
 images    = [];
@@ -52,9 +50,11 @@ for i=1 : 1:sz
                
                % histogram equalization
                im = histeq(im);
-               
-              %imshow(im)
-              %pause
+               %im = adapthisteq(im);
+               %im = imadjust(im,stretchlim(im),[0 1]);
+
+             % imshow(im)
+             % pause
             end
             
             % add new image to new column in images
