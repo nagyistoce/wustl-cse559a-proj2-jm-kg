@@ -14,7 +14,7 @@ for i=1:size(files,1)
         subject = files(i).name;
         subject_path = sprintf('%s/%s', root_dir, subject);
 
-        image_filenames = get_image_filenames(subject_path);
+        image_filenames = get_image_filepaths(subject_path);
 
         subjects(subject) = image_filenames;
     end
