@@ -6,7 +6,7 @@ clear;
 [fmatrix,names] = get_faces('lfw_faces');
 
 %% perform PCA
-[fmean U S V] = gm_pca(fmatrix,30);
+[fmean U S V] = gm_pca(fmatrix,9);
 
 % show mean face
 %meanim = reshape(fmean,130,110);
@@ -16,7 +16,8 @@ clear;
 [tfmatrix,tnames] = get_faces('lfw_test');
 
 %% do recognition and get back recognition matrix
-rmatrix = gm_recognition(tfmatrix, fmean, U, V, tnames, names);
+% the last number specifies the k value for knn
+rmatrix = gm_recognition(tfmatrix, fmean, U, V, tnames, names, 1);
 
 %% calculate results
 [results right wrong] = calc_results(rmatrix);
