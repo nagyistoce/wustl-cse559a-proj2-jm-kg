@@ -41,9 +41,7 @@ for ix=1:size(tfmatrix,2)
     true_subject = subjects(ix);
     found_subject = subjects(index);
 
-    true_subject = sprintf('orl_faces/%s/', true_subject{1});
-    found_subject = sprintf('test_faces/%s/', found_subject{1});
-    rmatrix = [rmatrix; {true_subject, found_subject}];
+    rmatrix = [rmatrix; {true_subject{1}, found_subject{1}}];
 
 end
 
