@@ -1,10 +1,15 @@
 % PCA Face Recognition
 % Kurt Glastetter and Josh Mason
 
-function [rmatrix nnghbors] = gm_recognition(tfmatrix, fmean, U, V, tfiles, origfiles, k)
+function [rmatrix nnghbors] = ...
+gm_recognition(tfmatrix, fmean, U, V, tfiles, origfiles, k, similarity)
 
 % get number of faces to recognize
 sz = size(tfmatrix,2);
+
+if (nargin == 7)
+   similarity = 'euclidian';
+end
 
 % for each test face
 for i=1:1:sz
@@ -13,11 +18,33 @@ for i=1:1:sz
     
     % project test image onto U matrix
     v = U'*W;
-    
-    % calculate euclidian distance W's coeffs (v) to "orig" image's coeffs (V)
-    d = sqrt(sum(abs(V' - repmat(v, [1 size(V,1)])).^2, 1));
+
+    if (strcmp(similarity,'euclidian'))
+        % calculate euclidian distance W's coeffs (v) to "orig" image's coeffs (V)
+        d = sqrt(sum(abs(V' - repmat(v, [1 size(V,1)])).^2, 1));
+    elseif (strcmp(similarity,'normeuclidian'))
+        % calculate the normalized distance
+        variance = var(V,1,1)';
+        variance = repmat(variance,[1 size(V,1)]);
+        d = sqrt(sum((abs(V' - repmat(v, [1 size(V,1)])).^2)./variance, 1));
+    elseif (strcmp(similarity,'mahalanobis'))
+        % calculate the mahalanobis distance
+        d = mahal(repmat(v',[size(V,1) 1]),V);
+    elseif (strcmp(similarity,'cosine'))
+        % cosine similarity
+        % angle = acos( (A.B) / (|A|*|B|) )
+        for j=1:sz
+            A = V(j,:);
+            B = v';
+            d(j) = acos( dot(A,B) / (norm(A) * norm(B)));
+        end
+    end
+
     [c indices] = sort(d);
-    
+
+%whos indices
+%whos k
+%whos origfiles
     % get the k nearest neighbors
     nn     = origfiles(indices(1:k));
     nnsize = size(nn,2);
