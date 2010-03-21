@@ -5,7 +5,8 @@ faces_dir = 'lfw_faces';
 test_faces_dir = 'lfw_test';
 image_height = 130;
 image_width = 110;
-preprocess_func = @crop_approx_face_rectangle;
+preprocess_func = @(im)(crop_approx_face_rectangle(im, image_height, ...
+                                                   image_width));
 
 subjects = keys(get_subjects(faces_dir));
 
