@@ -2,7 +2,7 @@
 % Kurt Glastetter and Josh Mason
 
 %% read in face database from disk
-function [images,filenames] = get_faces(directory,image_adjust_func)
+function [images,filenames] = get_faces(directory,preprocess_func)
 numimages = 0;
 images    = [];
 filenames = {};
@@ -11,7 +11,7 @@ files = dir(directory);
 sz    = size(files,1);
 
 if (nargin == 1)
-    image_adjust_func = @(im)(im); % do nothing
+    preprocess_func = @(im)(im); % do nothing
 end
 
 for i=1 : 1:sz
@@ -21,7 +21,7 @@ for i=1 : 1:sz
         newdir = sprintf('%s/%s', directory, files(i).name);
         % recurse into directory and get additional images and add columns
         % to end
-        [newimages,newfilenames] = get_faces(newdir,image_adjust_func);
+        [newimages,newfilenames] = get_faces(newdir,preprocess_func);
         images = [images,newimages];
         filenames = [filenames,newfilenames];
     else
@@ -30,7 +30,9 @@ for i=1 : 1:sz
             file = sprintf('%s/%s', directory, files(i).name);
             numimages = numimages + 1;
             im = imread(file);
-            im = image_adjust_func(im);
+
+            % call the image preprocessing function handle
+            im = preprocess_func(im);
 
             % add new image to new column in images
             images(:,numimages) = im(:);
