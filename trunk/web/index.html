@@ -5,10 +5,10 @@
 <title>Face Recognition</title>
 
 <STYLE TYPE="text/css">
-table{border-collapse:collapse;}
-table, td, th{border:1px solid black;}
-td{padding:5px;font-family: Courier New; font-size: 10pt;}
-th{padding:5px;font-family: Courier New; font-size: 11pt;}
+table.s1{border-style:none;}
+table.s2{border-collapse:collapse; border:1px solid black;}
+table.s2 td{padding:5px; font-family: Courier New; font-size: 10pt; border:1px solid black;}
+table.s2 th{padding:5px; font-family: Courier New; font-size: 11pt; border:1px solid black;}
 p{font-family: Courier New; font-size: 10pt;}
 h3{font-family: Courier New; font-size: 12pt;}
 </STYLE>
@@ -17,7 +17,11 @@ h3{font-family: Courier New; font-size: 12pt;}
 <body>
 <h1>Face Recognition</h1>
 <h3>By Kurt Glastetter, Josh Mason</h3>
-Link to source: <a href="">Source</a><br>
+Link to source: <a href="">Source</a><br><br>
+<table class="s1" title="Eigenfaces">
+<tr> <td><img src="ef1.png"/></td> <td><img src="ef2.png"/></td> <td><img src="ef3.png"/></td> <td><img src="ef4.png"/></td> <td><img src="ef5.png"/></td></tr>
+</table>
+
 
 <h2>Description</h2>
 
@@ -54,7 +58,7 @@ For this project, we compared various techniques for face recognition.  We focus
 <h2>Base Results</h2>
 <p>Below is a table showing our overall results.  The table below shows the results when we used Euclidian distance as our measure of similarity and <i>k=1</i> for the value of <i>k</i> in k-Nearest Neigbhor.</p>
 
-<table border="1" title="Euclidian Distance Results">
+<table class="s2" title="Euclidian Distance Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
 <tr> <td>PCA 4 Coefficients</td> <td>11</td>             <td>29</td>               <td>27.5</td> </tr>
@@ -64,7 +68,7 @@ For this project, we compared various techniques for face recognition.  We focus
 </table>
 
 <p>We tried many other combinations of similarity measures and modifying the value of <i>k</i>.  The table below shows the top 5 combinations obtained.  All the results below are for PCA only.  Since Euclidian distance was the best measurement of similarity, all the results below were obtained using Euclidian distance as the similarity measurement.</p>
-<table border="1" title="Top Results">
+<table class="s2" title="Top Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>c=9,k=1,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
 <tr> <td>c=9,k=3,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
@@ -78,7 +82,7 @@ In the table above, c=# of coefficients used, h=histogram equalization, e=edge m
 
 <h2>Extension 1 Results</h2>
 <p>Below is a table showing our overall results for our testing on the aligned labelled faces in the wild image set.  This uses only the center 70x100 face portion of the image.</p>
-<table border="1" title="Euclidian Distance Results">
+<table class="s2" title="Euclidian Distance Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.1</td>  </tr>
 <tr> <td>PCA 4 Coefficients</td> <td>4</td>              <td>42</td>               <td>8.7</td>  </tr>
@@ -87,7 +91,7 @@ In the table above, c=# of coefficients used, h=histogram equalization, e=edge m
 <tr> <td>Mean Face</td>          <td>18</td>             <td>28</td>               <td>39.1</td> </tr>
 </table>
 <p>Below is a table showing our overall results for testing the aligned labelled faces in the wild, but by training with equal-sized data sets for each subject (18 images each).  The training images for each subject were chosen at random.  Again, only the center 70x100 face portion of the image was used.</p>
-<table border="1" title="Euclidian Distance Results">
+<table class="s2" title="Euclidian Distance Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.2</td>  </tr>
 <tr> <td>PCA 4 Coefficients</td> <td>3</td>              <td>43</td>               <td>6.5</td>  </tr>
@@ -98,7 +102,7 @@ In the table above, c=# of coefficients used, h=histogram equalization, e=edge m
 
 <h2>Extension 2 Results</h2>
 <p>Below is a table showing our overall results when trying using histogram equalization as a preprocessing step. The results were obtained using Euclidian distance and <i>k=1</i>.</p>
-<table border="1" title="Histogram Equalization Results">
+<table class="s2" title="Histogram Equalization Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td>10.0</td> </tr>
 <tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
@@ -107,7 +111,7 @@ In the table above, c=# of coefficients used, h=histogram equalization, e=edge m
 </table>
 
 <p>Below is a table showing our overall results when using edge detection as a preprocessing step. The results were obtained using Euclidian distance and <i>k=1</i>.</p>
-<table border="1" title="Edge Detection Preprocessing Results">
+<table class="s2" title="Edge Detection Preprocessing Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td>10.0</td> </tr>
 <tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
