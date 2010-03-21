@@ -1,7 +1,7 @@
 % PCA Face Recognition
 % Kurt Glastetter and Josh Mason
 
-function outIm = crop_approx_face_rectangle(im, desired_height, desired_width)
+function outIm = crop_center(im, desired_height, desired_width)
     center_y = size(im,1)/2;
     center_x = size(im,2)/2;
 
