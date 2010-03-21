@@ -3,8 +3,8 @@
 
 faces_dir = 'lfw_faces';
 test_faces_dir = 'lfw_test';
-image_height = 130;
-image_width = 110;
+image_height = 100;
+image_width = 70;
 preprocess_func = @(im)(crop_center(im, image_height, image_width));
 
 subjects = keys(get_subjects(faces_dir));
