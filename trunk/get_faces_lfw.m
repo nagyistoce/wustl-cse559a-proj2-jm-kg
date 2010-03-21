@@ -4,7 +4,7 @@
 %% read in face database from disk
 % numimages is used when recursively calling this function, don't pass
 % it as a param.
-function [images,filenames] = get_faces(directory,preprocess)
+function [images,filenames] = get_faces_lfw(directory,preprocess)
 numimages = 0;
 images    = [];
 filenames = {};
@@ -23,7 +23,7 @@ for i=1 : 1:sz
         newdir = sprintf('%s/%s', directory, files(i).name);
         % recurse into directory and get additional images and add columns
         % to end
-        [newimages,newfilenames] = get_faces(newdir,preprocess);
+        [newimages,newfilenames] = get_faces_lfw(newdir,preprocess);
         images = [images,newimages];
         filenames = [filenames,newfilenames];
     else
@@ -71,7 +71,7 @@ end
 end
 
 % test code
-% [images,names] = get_faces('att_faces');
+% [images,names] = get_faces_lfw('att_faces');
 % im301 = imread(char(names(301)));
 % im301 = im301(:);
 % isequal(im301,images(301)) % better be true

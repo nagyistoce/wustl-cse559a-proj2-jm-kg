@@ -10,13 +10,13 @@ for ix=1:size(subjects,2)
     %% read in faces
     subject = subjects(ix);
     subject = subject{1};
-    [fmatrix,names] = get_faces(sprintf('lfw_faces/%s', subject));
+    [fmatrix,names] = get_faces_lfw(sprintf('lfw_faces/%s', subject));
 
     % get mean face (grrr)
     fmean = mean(fmatrix,2);
 
     %% show mean face
-    %meanim = reshape(fmean,112,92);
+    %meanim = reshape(fmean,130,110);
     %imshow(uint8(meanim));
 
     %% save the mean faces for later
@@ -25,7 +25,7 @@ for ix=1:size(subjects,2)
 end
 
 %% read in test faces
-[tfmatrix,tnames] = get_faces('lfw_test');
+[tfmatrix,tnames] = get_faces_lfw('lfw_test');
 
 rmatrix = [];
 
