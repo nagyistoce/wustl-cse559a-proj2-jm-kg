@@ -20,28 +20,36 @@ h3{font-family: Courier New; font-size: 12pt;}
 Link to source: <a href="">Source</a><br>
 
 <h2>Description</h2>
-<p>A nice description.</p>
 
-<p>We made use of k-Nearest Neighbor in our determination of which subject a test image best matched.  We tried many combinations of similarity measures and modifying the value of <i>k</i>.  The similarity measures we tried using were:</p>
+<p>
+For this project, we compared various techniques for face recognition.  We focused our efforts on Principal Component Analysis and Mean Face comparison.  We experimented using different pre-processing techniques before performing PCA as well as testing different measures of similarity and modifying the value of <i>k</i> in k-Nearest Neighbor.</p>
+
+<p>We used k-Nearest Neighbor to attempt to match a face with the subject it most closely related to.  kNN works by finding the neighbors that are "closest" to a test image and picking the neighbor that is most frequent as its best match.  The value of <i>k</i> determines how many neighbors will be analyzed when trying to pick a match.  In order for kNN to work, a measure of similarity between the test image and all training images needs to be computed.  These results are then sorted and the top <i>k</i> neighbors are chosen.  The neighbors in our algorithm are the list of images that were the closest match to the test image. Because each person has multiple images for them, we determine which person showed up most frequently, and say that is who the test image most closely matches.</p>
+
+<p>We tried four different measures of similarity before using its results to find the nearest neighbor. The similarity measures we tried using were:</p>
 <ul>
-	<li>Euclidian Distance</li><br>
-	Description.
+	<li>Euclidian Distance (<a href="http://en.wikipedia.org/wiki/Euclidean_distance">info</a>)</li><br>
+	Euclidian Distance (ED) performed the best compared to the other measures of similarity that we experimented with.
 	<br><br>
-	<li>Normalized Euclidean Distance</li><br>
-	Description.
+	<li>Normalized Euclidian Distance (<a href="http://www.tsi.enst.fr/tsi/enseignement/ressources/mti/classif-textures/node4.html">info</a>)</li><br>
+	Normalized Euclidian Distance (NED) performed exactly the same as ED did in all of our experiments.
 	<br><br>
-	<li>Cosine Angle</li><br>
-	Description.
+	<li>Cosine Similarity (<a href="http://en.wikipedia.org/wiki/Cosine_similarity">info</a>)</li><br>
+	Cosine (CS) performed poorly in all of our experiments.  It's results are not shown in any of our tables below because it's results are not worth showing.  It performed better than chance, but only marginally.  It was not a good measure of similarity here.  This is not suprising as CS tends to be the preferred technique for comparing text and not faces or coefficients from PCA.
 	<br><br>
-	<li>Mahalanobis</li><br>
-	Description.
+	<li>Mahalanobis Distance (<a href="http://en.wikipedia.org/wiki/Mahalanobis_distance">info</a>)</li><br>
+	Mahalanobis Distance (MD) performed extermely bad.  It performed as good as chance, but no better.  It's possible we implemented MD incorrectly or that MD really is just not a good measure of similarity for comparing coefficients.
 </ul>
+
+<del>describe PCA algorithm</del>
+
+<del>describe mean face algorithm</del>
 
 <h3>Extension 1 Description</h3>
 <p>Description of extension 1.</p>
 
 <h3>Extension 2 Description</h3>
-<p>Description of extension2.</p>
+<p><del>(general observations, histogram equalization helped achieve better results when using more coefficients, but decreased results in all other cases.  edge detection pretty much sucked and did worse than if we had just not used it.  histogram equalization with edge map overlayed performed better than no preprocessing, but worse than just histo eq.  obviously, edge detection brings down the results.  probably because information is being lost from the image.  we also tried blurring the image, but this also performed poorly, about as good as edge detection.  Likely for the same reason edge detection did bad.</del></p>
 
 <h2>Base Results</h2>
 <p>Below is a table showing our overall results.  The table below shows the results when we used Euclidian distance as our measure of similarity and <i>k=1</i> for the value of <i>k</i> in k-Nearest Neigbhor.</p>
@@ -55,15 +63,16 @@ Link to source: <a href="">Source</a><br>
 <tr> <td>Mean Face</td>          <td>39</td>             <td>1</td>                <td>97.5</td> </tr>
 </table>
 
-<p>We tried many other combinations of similarity measures and modifying the value of <i>k</i>.  The table below shows the top 5 combinations obtained.</p>
-<table border="1" title="Euclidian Distance Results">
+<p>We tried many other combinations of similarity measures and modifying the value of <i>k</i>.  The table below shows the top 5 combinations obtained.  All the results below are for PCA only.  Since Euclidian distance was the best measurement of similarity, all the results below were obtained using Euclidian distance as the similarity measurement.</p>
+<table border="1" title="Top Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>method 1</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
-<tr> <td>method 2</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
-<tr> <td>method 3</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
-<tr> <td>method 4</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
-<tr> <td>method 5</td>          <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>c=9,k=1,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
+<tr> <td>c=9,k=3,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
+<tr> <td>c=9,k=3,he</td>         <td>26</td>             <td>24</td>               <td>65.0</td> </tr>
+<tr> <td>c=9,k=1,e</td>          <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
+<tr> <td>c=9,k=3,e</td>          <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
 </table>
+In the table above, c=# of coefficients used, h=histogram equalization, e=edge map overlayed on image, he=histogram equalization performed, then edge map overlayed on top, k=# of neighbors examined.
 
 <p>explanation of results</p>
 
