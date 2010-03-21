@@ -42,9 +42,6 @@ for i=1:1:sz
 
     [c indices] = sort(d);
 
-%whos indices
-%whos k
-%whos origfiles
     % get the k nearest neighbors
     nn     = origfiles(indices(1:k));
     nnsize = size(nn,2);
