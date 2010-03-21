@@ -2,7 +2,7 @@
 % Kurt Glastetter and Josh Mason
 
 %% read in face database from disk
-function [images,filenames] = get_faces_lfw(directory,preprocess)
+function [images,filenames] = get_faces_lfw(directory,image_adjust_func,preprocess)
 numimages = 0;
 images    = [];
 filenames = {};
@@ -10,7 +10,7 @@ filenames = {};
 files = dir(directory);
 sz    = size(files,1);
 
-if (nargin == 1)
+if (nargin == 2)
    preprocess = 0;
 end
 
@@ -21,7 +21,7 @@ for i=1 : 1:sz
         newdir = sprintf('%s/%s', directory, files(i).name);
         % recurse into directory and get additional images and add columns
         % to end
-        [newimages,newfilenames] = get_faces_lfw(newdir,preprocess);
+        [newimages,newfilenames] = get_faces_lfw(newdir,image_adjust_func,preprocess);
         images = [images,newimages];
         filenames = [filenames,newfilenames];
     else
@@ -30,8 +30,7 @@ for i=1 : 1:sz
             file = sprintf('%s/%s', directory, files(i).name);
             numimages = numimages + 1;
             im = imread(file);
-            %im = imresize(im, 0.5);
-            im = im((125-65+1):(125+65), (125-55+1):(125+55));
+            im = image_adjust_func(im);
 
             % check if pre-processing needs to occur
             if (preprocess == 1)
@@ -69,9 +68,3 @@ for i=1 : 1:sz
 end
 
 end
-
-% test code
-% [images,names] = get_faces_lfw('att_faces');
-% im301 = imread(char(names(301)));
-% im301 = im301(:);
-% isequal(im301,images(301)) % better be true
