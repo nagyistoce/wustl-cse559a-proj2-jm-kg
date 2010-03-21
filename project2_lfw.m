@@ -3,7 +3,7 @@
 clear;
 
 %% read in faces
-[fmatrix,names] = get_faces_lfw('lfw_faces', @crop_approx_face_rectangle);
+[fmatrix,names] = get_faces('lfw_faces', @crop_approx_face_rectangle);
 
 %% perform PCA
 [fmean U S V] = gm_pca(fmatrix,2);
@@ -13,7 +13,7 @@ clear;
 %imshow(uint8(meanim));
 
 %% read in test faces
-[tfmatrix,tnames] = get_faces_lfw('lfw_test', @crop_approx_face_rectangle);
+[tfmatrix,tnames] = get_faces('lfw_test', @crop_approx_face_rectangle);
 
 %% do recognition and get back recognition matrix
 % the last number specifies the k value for knn
