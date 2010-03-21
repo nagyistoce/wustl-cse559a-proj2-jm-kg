@@ -3,12 +3,99 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Face Recognition</title>
+
+<STYLE TYPE="text/css">
+table{border-collapse:collapse;}
+table, td, th{border:1px solid black;}
+td{padding:5px;font-family: Courier New; font-size: 10pt;}
+th{paddign:5px;font-family: Courier New; font-size: 11pt;}
+p{font-family: Courier New; font-size: 10pt;}
+h3{font-family: Courier New; font-size: 12pt;}
+</STYLE>
 </head>
 
 <body>
 <h1>Face Recognition</h1>
 <h3>By Kurt Glastetter, Josh Mason</h3>
 Link to source: <a href="">Source</a><br>
+
+<h2>Description</h2>
+<p>A nice description.</p>
+
+<p>We made use of k-Nearest Neighbor in our determination of which subject a test image best matched.  We tried many combinations of similarity measures and modifying the value of <i>k</i>.  The similarity measures we tried using were:</p>
+<ul>
+	<li>Euclidian Distance</li><br>
+	Description.
+	<br><br>
+	<li>Normalized Euclidean Distance</li><br>
+	Description.
+	<br><br>
+	<li>Cosine Angle</li><br>
+	Description.
+	<br><br>
+	<li>Mahalanobis</li><br>
+	Description.
+</ul>
+
+<h3>Extension 1 Description</h3>
+<p>Description of extension 1.</p>
+
+<h3>Extension 2 Description</h3>
+<p>Description of extension2.</p>
+
+<h2>Base Results</h2>
+<p>Below is a table showing our overall results.  The table below shows the results when we used Euclidian distance as our measure of similarity and <i>k=1</i> for the value of <i>k</i> in k-Nearest Neigbhor.</p>
+
+<table border="1" title="Euclidian Distance Results">
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>Mean Face</td>          <td>val</td>            <td>val</td>              <td>val</td> </tr>
+</table>
+
+<p>We tried many other combinations of similarity measures and modifying the value of <i>k</i>.  The table below shows the top 5 combinations obtained.</p>
+<table border="1" title="Euclidian Distance Results">
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>method 1</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>method 2</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>method 3</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>method 4</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>method 5</td>          <td>val</td>            <td>val</td>              <td>val</td> </tr>
+</table>
+
+<p>explanation of results</p>
+
+<h2>Extension 1 Results</h2>
+<p>Below is a table showing our overall results for our testing on the alighned labelled faces in the wild image set.</p>
+<table border="1" title="Euclidian Distance Results">
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>Mean Face</td>          <td>val</td>            <td>val</td>              <td>val</td> </tr>
+</table>
+
+<h2>Extension 2 Results</h2>
+<p>Below is a table showing our overall results when trying using histogram equalization as a preprocessing step. The results were obtained using Euclidian distance and <i>k=1</i>.</p>
+<table border="1" title="Histogram Equalization Results">
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+</table>
+
+<p>Below is a table showing our overall results when using edge detection as a preprocessing step. The results were obtained using Euclidian distance and <i>k=1</i>.</p>
+<table border="1" title="Edge Detection Preprocessing Results">
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>val</td>            <td>val</td>              <td>val</td> </tr>
+</table>
 
 </body>
 
