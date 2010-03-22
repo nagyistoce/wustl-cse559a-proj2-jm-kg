@@ -8,10 +8,11 @@
 <style type="text/css">
 table.s1{border-style:none;}
 table.s2{border-collapse:collapse; border:1px solid black;}
-table.s2 td{padding:5px; font-family: Courier New; font-size: 10pt; border:1px solid black;}
-table.s2 th{padding:5px; font-family: Courier New; font-size: 11pt; border:1px solid black;}
+table.s2 td{padding:4px; font-family: Courier New; font-size: 9pt; border:1px solid black;}
+table.s2 th{padding:4px; font-family: Courier New; font-size: 10pt; border:1px solid black;}
 body{font-family: Courier New; font-size: 10pt;}
 h3{font-family: Courier New; font-size: 12pt;}
+h4{font-family: Courier New; font-size: 11pt;}
 </style>
 </head>
 
@@ -53,96 +54,121 @@ For this project, we compared various techniques for face recognition.  We focus
 
 <del>describe mean face algorithm</del>
 
-<h3>Extension 1 Description</h3>
+<h3>Initial Results</h3>
+<p>Below is the table showing our initial results on the ATT face set with no pre-processing performed.  The table below shows the results when we used Euclidean distance as our measure of similarity and <i>k=1</i> for the value of <i>k</i> in k-Nearest Neighbor.</p>
+
+<table class="s2" title="Euclidean Distance Results">
+<caption>Initial Results</caption>
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>11</td>             <td>29</td>               <td>27.5</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>14</td>             <td>26</td>               <td>35.0</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>23</td>             <td>17</td>               <td>57.5</td> </tr>
+<tr> <td>Mean Face</td>          <td>39</td>             <td>1</td>                <td>97.5</td> </tr>
+</table>
+
+<h2>Extension 1 Description</h2>
 
 <p>We extended the base option to work with another data set of faces; specifically, the 40-person subset of "aligned labelled faces in the wild".  We tested this data by using the full set of images as training data (with different numbers of images per person), and also by limiting the training data to 18 randomly selected images per person (such that each person has equal representation in the training data).</p>
 <p>For each of these training data options, we tried using full images (but resampled to half-size, due to computer memory constraints), and using only the face portion of the image (the 70x100 center rectangle).  Using the full images produced very poor results in all tests, so that data is not shown.  This is probably because much of the background portions of the images were evaluated in the matching, which contributes to erroneous results.  Using only the central face portion of the image produced much better results, but still markedly worse than that for the more homogeneous data set in the base option.  In fact, the best results are significantly less than half correct.  The poor results are probably due to the fact that the images vary so much more than the ones from base option.  Even with only the face portion shown, the lighting conditions are still greatly varying compared to that of base option, resulting in poor matching.</p>
 <p>Somewhat surprisingly, limiting the data set to an equal number of images per person yielded slightly worse results.  This seems to indicate that having more images for some people does not necessarily cause erroneous matches to gravitate toward them.  Rather, limiting the diversity of the training set images probably contributes to worse matches.</p>
 
-<h3>Extension 2 Description</h3>
-<p><del>(general observations, histogram equalization helped achieve better results when using more coefficients, but decreased results in all other cases.  edge detection pretty much sucked and did worse than if we had just not used it.  histogram equalization with edge map overlaid performed better than no preprocessing, but worse than just histo eq.  obviously, edge detection brings down the results.  probably because information is being lost from the image.  we also tried blurring the image, but this also performed poorly, about as good as edge detection.  Likely for the same reason edge detection did bad.</del></p>
-
-<h2>Base Results</h2>
-<p>Below is a table showing our overall results.  The table below shows the results when we used Euclidean distance as our measure of similarity and <i>k=1</i> for the value of <i>k</i> in k-Nearest Neighbor.</p>
-
-<table class="s2" title="Euclidean Distance Results">
-<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>PCA 2 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
-
-<tr> <td>PCA 4 Coefficients</td> <td>11</td>             <td>29</td>               <td>27.5</td> </tr>
-<tr> <td>PCA 6 Coefficients</td> <td>14</td>             <td>26</td>               <td>35.0</td> </tr>
-
-<tr> <td>PCA 9 Coefficients</td> <td>23</td>             <td>17</td>               <td>57.5</td> </tr>
-<tr> <td>Mean Face</td>          <td>39</td>             <td>1</td>                <td>97.5</td> </tr>
-
-</table>
-
-<p>We tried many other combinations of similarity measures and modifying the value of <i>k</i>.  The table below shows the top 5 combinations obtained.  All the results below are for PCA only.  Since Euclidean distance was the best measurement of similarity, all the results below were obtained using Euclidean distance as the similarity measurement.</p>
-<table class="s2" title="Top Results">
-<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-
-<tr> <td>c=9,k=1,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
-<tr> <td>c=9,k=3,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
-
-<tr> <td>c=9,k=3,he</td>         <td>26</td>             <td>24</td>               <td>65.0</td> </tr>
-<tr> <td>c=9,k=1,e</td>          <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
-
-<tr> <td>c=9,k=3,e</td>          <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
-</table>
-<p>In the table above, c=# of coefficients used, h=histogram equalization, e=edge map overlaid on image, he=histogram equalization performed, then edge map overlaid on top, k=# of neighbors examined.</p>
-
-<p>explanation of results</p>
-
-<h2>Extension 1 Results</h2>
-<p>Below is a table showing our overall results for our testing on the aligned labelled faces in the wild image set.  This uses only the center 70x100 face portion of the image.</p>
-<table class="s2" title="Euclidean Distance Results">
+<h3>Extension 1 Results</h3>
+<p>Below is the table showing our overall results for our testing on the aligned labelled faces in the wild image set.  This uses only the center 70x100 face portion of the image.</p>
+<table class="s2" title="Aligned labelled faces results">
+<caption>Aligned Labelled Faces Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.1</td>  </tr>
-
 <tr> <td>PCA 4 Coefficients</td> <td>4</td>              <td>42</td>               <td>8.7</td>  </tr>
 <tr> <td>PCA 6 Coefficients</td> <td>4</td>              <td>42</td>               <td>8.7</td>  </tr>
-
 <tr> <td>PCA 9 Coefficients</td> <td>6</td>              <td>40</td>               <td>13.0</td> </tr>
 <tr> <td>Mean Face</td>          <td>18</td>             <td>28</td>               <td>39.1</td> </tr>
-
 </table>
-<p>Below is a table showing our overall results for testing the aligned labelled faces in the wild, but by training with equal-sized data sets for each subject (18 images each).  The training images for each subject were chosen at random.  Again, only the center 70x100 face portion of the image was used.</p>
-<table class="s2" title="Euclidean Distance Results">
+
+<p>Below is the table showing our overall results for testing the aligned labelled faces in the wild, but by training with equal-sized data sets for each subject (18 images each).  The training images for each subject were chosen at random.  Again, only the center 70x100 face portion of the image was used.</p>
+<table class="s2" title="ALF Equal Sized Sets Results">
+<caption>ALF Equal Sized Sets Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.2</td>  </tr>
-
 <tr> <td>PCA 4 Coefficients</td> <td>3</td>              <td>43</td>               <td>6.5</td>  </tr>
 <tr> <td>PCA 6 Coefficients</td> <td>3</td>              <td>43</td>               <td>6.5</td>  </tr>
-
 <tr> <td>PCA 9 Coefficients</td> <td>6</td>              <td>40</td>               <td>13.0</td> </tr>
 <tr> <td>Mean Face</td>          <td>16</td>             <td>30</td>               <td>34.8</td> </tr>
-
 </table>
 
-<h2>Extension 2 Results</h2>
-<p>Below is a table showing our overall results when trying using histogram equalization as a preprocessing step. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
-<table class="s2" title="Histogram Equalization Results">
-<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<h2>Extension 2 Description</h2>
 
-<tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td>10.0</td> </tr>
-<tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
-
-<tr> <td>PCA 6 Coefficients</td> <td>11</td>             <td>29</td>               <td>27.5</td> </tr>
-<tr> <td>PCA 9 Coefficients</td> <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
-
+<table class="s1">
+<tr> <td><img src="im1.png" alt="original image" title="original image"/></td> <td><img src="edgemap.png" alt="edge map" title="edge map"/></td> <td><img src="overlaidedgemap.png" alt="edge map overlay" title="edge map overlay"/></td> <td><img src="histeq.png" alt="equalized histogram" title="equalized histogram"/></td> <td><img src="overlaidedgemaphisteq.png" alt="equalized histogram w/overlaid edge map" title="equalized histogram w/overlaid edge map"/></td></tr>
 </table>
 
-<p>Below is a table showing our overall results when using edge detection as a preprocessing step. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
-<table class="s2" title="Edge Detection Preprocessing Results">
-<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<p>The images above show the various pre-processing techniques which were used prior to performing PCA on the image set.  From left to right, the images above are: the original image, the edge map of the original image, the edge map overlaid on the original image, the original image with an equalized histogram, the original image with an equalized histogram with the edge map overlaid on top.</p>
 
+<p>The first pre-processing technique we tried was to calculate the edge map of the original image.  We used the built in Matlab <i>edge</i> function to calculate the edge map.  We thought that by reducing the image down to the edge map, we might be able to reduce the time needed by PCA to compute the coefficients.  We also believed it would lead to better results because it would reduce the face down to a few key features that would distinguish it from other faces.  Surprisingly, the use of edge map caused the number of correct matches to be greatly reduced.  We theorize that this reduction in correct matches is due to a reduction in the amount of image data describing the face.    Because there is less data describing the face, the differences between one face and another is decreased, leaving PCA to generate similar coefficients for dissimilar faces. See the <a href="#e2r1">Edge Detection Results</a> table below for results of this experiment.</p>
+
+<p>Because of this observation, we thought that if we tried overlaying the edge map on top of the original image, we might be able to boost our initial results.  We believed that retaining the original image data and making edges more apparent might help to distinguish faces from another.  Our experiment proved us partially correct for all but PCA with two coefficients.  It definitely helped improve our results over just using the edge map as a pre-processing step.  Our results also increased slightly over using the just the original image for all cases except where just two coefficients were used.  We speculate this increase in overall success of facial recognition is due to additional detail about the image being introduced before running PCA.  This additional info helps to better separate the distinguishing features between each face and helps lead to better results when performing recognition. See the <a href="#e2r2">Overlaid Edge Detection Results</a> table below for results of this experiment.</p>
+
+<p>Not entirely happy with the previous results, we wanted tried another pre-processing technique and thought we could improve a bit more.  This time we tried histogram equalization on the entire image.  Histogram equalization is a process used to increase the pixel intensity of the image to match some defined histogram.  Histogram equalization can have the benefit of making less noticeable features more distinguishable.  For all of our tests, we used histogram equalization with a flat histogram.  This had the overall effect of boosting the contrast in our images.  The initial results of histogram equalization were about the same or worse than PCA on the original images.  However, when 9 coefficients were used, our results improved from 57.5% to 72.5%.  We believe the reason for this disparity between the results getting worse for a small number of coefficients and then getting better when more coefficients were used is because the histogram equalization made the differences among the faces ambiguous when only a small number of coefficients were used.  That is even though some features were made more apparent, some features were "washed" out when the overall pixel intensity increased.  With a small number of coefficients, the more subtle features where not able to be distinguished, and thus resulted in poor performance.  However, once more coefficients were used, the subtle features where able to be captured by the basis images and the coefficients of PCA.  See the <a href="#e2r3">Histogram Equalization Results</a> table below for results of this experiment.</p>
+
+<p>Because of what we learned when overlaying the edge map on the original image and making use of histogram equalization, we decided to try overlaying the edge map on top of the histogram equalized facial image.  Our results surprised us.  Compared to the overlaid edge map, the results decreased in all but the 9 coefficient case.  When compared with histogram equalization, the results were similar, but overall slightly worse.  This would seem to tell us that when each of the pre-processing techniques are done independent of each other, there is a good separation of features distinguishing the faces that PCA can detect and use to separate the images.  However, when the two pre-processing techniques are combined, there may be a blurring or merging of the unique features into a smaller set of features, which results in PCA creating basis images and coefficients that lead to improper matching when evaluation is performed. See the <a href="#e2r4">Histogram Equalization w/ Overlaid Edge Detection Results</a> table below for results of this experiment.</p>
+
+<h3>Extension 2 Results</h3>
+<a name="e2r1"></a>
+<p>Below is the table showing our overall results when using edge detection as a preprocessing step. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
+<table class="s2" title="Edge Detection Results">
+<caption>Edge Detection Results</caption>
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td>10.0</td> </tr>
 <tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
-
 <tr> <td>PCA 6 Coefficients</td> <td>9</td>              <td>31</td>               <td>22.5</td> </tr>
 <tr> <td>PCA 9 Coefficients</td> <td>12</td>             <td>28</td>               <td>30.0</td> </tr>
-
 </table>
+
+<a name="e2r2"></a>
+<p>Below is the table showing our overall results when using an edge map overlaid on the original image. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
+<table class="s2" title="Overlaid Edge Detection Results">
+<caption>Overlaid Edge Detection Results</caption>
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td></td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>12</td>             <td>28</td>               <td></td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>16</td>             <td>24</td>               <td></td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>24</td>             <td>16</td>               <td></td> </tr>
+</table>
+
+<a name="e2r3"></a>
+<p>Below is the table showing our overall results when using histogram equalization as a preprocessing step. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
+<table class="s2" title="Histogram Equalization Results">
+<caption>Histogram Equalization Results</caption>
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td>10.0</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>11</td>             <td>29</td>               <td>27.5</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
+</table>
+
+<a name="e2r4"></a>
+<p>Below is the table showing our overall results when using an edge map overlaid on the histogram equalized image. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
+<table class="s2" title="Histogram Equalization with Overlaid Edge Detection Results">
+<caption>Histogram Equalization w/ Overlaid Edge Detection Results</caption>
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>2</td>              <td>38</td>               <td></td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>34</td>               <td></td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>14</td>             <td>26</td>               <td></td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>26</td>             <td>14</td>               <td></td> </tr>
+</table>
+
+<a name="e2r5"></a>
+<p>We tried many combinations of similarity measures and modifying the value of <i>k</i>.  The table below shows the top 5 combinations obtained.  All the results below are for PCA only.  Since Euclidean distance was the best measurement of similarity, all the results below were obtained using Euclidean distance as the similarity measurement.</p>
+<table class="s2" title="Top Results">
+<caption>Top Results</caption>
+<tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
+<tr> <td>c=9,k=1,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
+<tr> <td>c=9,k=3,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
+<tr> <td>c=9,k=3,he</td>         <td>26</td>             <td>14</td>               <td>65.0</td> </tr>
+<tr> <td>c=9,k=1,e</td>          <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
+<tr> <td>c=9,k=3,e</td>          <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
+</table>
+<p>In the table above, c=# of coefficients used, h=histogram equalization, e=edge map overlaid on image, he=histogram equalization w/performed, then edge map overlaid on top, k=# of neighbors examined.</p>
 
 <hr/>
 <p><a href="http://validator.w3.org/check?uri=referer"><img
