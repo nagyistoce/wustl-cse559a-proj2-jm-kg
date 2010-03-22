@@ -34,19 +34,19 @@ For this project, we compared various techniques for face recognition.  We focus
 
 <p>We tried four different measures of similarity before using its results to find the nearest neighbor. The similarity measures we tried using were:</p>
 <ul>
-	<li>Euclidian Distance (<a href="http://en.wikipedia.org/wiki/Euclidean_distance">info</a>)<br/><br/>
+	<li>Euclidean Distance (<a href="http://en.wikipedia.org/wiki/Euclidean_distance">info</a>)<br/><br/>
 
-	Euclidian Distance (ED) performed the best compared to the other measures of similarity that we experimented with.
+	Euclidean Distance (ED) performed the best compared to the other measures of similarity that we experimented with.
 	<br/><br/></li>
-	<li>Normalized Euclidian Distance (<a href="http://www.tsi.enst.fr/tsi/enseignement/ressources/mti/classif-textures/node4.html">info</a>)<br/><br/>
-	Normalized Euclidian Distance (NED) performed exactly the same as ED did in all of our experiments.
+	<li>Normalized Euclidean Distance (<a href="http://www.tsi.enst.fr/tsi/enseignement/ressources/mti/classif-textures/node4.html">info</a>)<br/><br/>
+	Normalized Euclidean Distance (NED) performed exactly the same as ED did in all of our experiments.
 	<br/><br/></li>
 	<li>Cosine Similarity (<a href="http://en.wikipedia.org/wiki/Cosine_similarity">info</a>)<br/><br/>
-	Cosine (CS) performed poorly in all of our experiments.  It's results are not shown in any of our tables below because it's results are not worth showing.  It performed better than chance, but only marginally.  It was not a good measure of similarity here.  This is not suprising as CS tends to be the preferred technique for comparing text and not faces or coefficients from PCA.
+	Cosine (CS) performed poorly in all of our experiments.  It's results are not shown in any of our tables below because it's results are not worth showing.  It performed better than chance, but only marginally.  It was not a good measure of similarity here.  This is not surprising as CS tends to be the preferred technique for comparing text and not faces or coefficients from PCA.
 	<br/><br/></li>
 
 	<li>Mahalanobis Distance (<a href="http://en.wikipedia.org/wiki/Mahalanobis_distance">info</a>)<br/><br/>
-	Mahalanobis Distance (MD) performed extermely bad.  It performed as good as chance, but no better.  It's possible we implemented MD incorrectly or that MD really is just not a good measure of similarity for comparing coefficients.</li>
+	Mahalanobis Distance (MD) performed extremely badly.  It performed as good as chance, but no better.  It's possible we implemented MD incorrectly or that MD really is just not a good measure of similarity for comparing coefficients.</li>
 </ul>
 
 <del>describe PCA algorithm</del>
@@ -60,12 +60,12 @@ For this project, we compared various techniques for face recognition.  We focus
 <p>Somewhat surprisingly, limiting the data set to an equal number of images per person yielded slightly worse results.  This seems to indicate that having more images for some people does not necessarily cause erroneous matches to gravitate toward them.  Rather, limiting the diversity of the training set images probably contributes to worse matches.</p>
 
 <h3>Extension 2 Description</h3>
-<p><del>(general observations, histogram equalization helped achieve better results when using more coefficients, but decreased results in all other cases.  edge detection pretty much sucked and did worse than if we had just not used it.  histogram equalization with edge map overlayed performed better than no preprocessing, but worse than just histo eq.  obviously, edge detection brings down the results.  probably because information is being lost from the image.  we also tried blurring the image, but this also performed poorly, about as good as edge detection.  Likely for the same reason edge detection did bad.</del></p>
+<p><del>(general observations, histogram equalization helped achieve better results when using more coefficients, but decreased results in all other cases.  edge detection pretty much sucked and did worse than if we had just not used it.  histogram equalization with edge map overlaid performed better than no preprocessing, but worse than just histo eq.  obviously, edge detection brings down the results.  probably because information is being lost from the image.  we also tried blurring the image, but this also performed poorly, about as good as edge detection.  Likely for the same reason edge detection did bad.</del></p>
 
 <h2>Base Results</h2>
-<p>Below is a table showing our overall results.  The table below shows the results when we used Euclidian distance as our measure of similarity and <i>k=1</i> for the value of <i>k</i> in k-Nearest Neigbhor.</p>
+<p>Below is a table showing our overall results.  The table below shows the results when we used Euclidean distance as our measure of similarity and <i>k=1</i> for the value of <i>k</i> in k-Nearest Neighbor.</p>
 
-<table class="s2" title="Euclidian Distance Results">
+<table class="s2" title="Euclidean Distance Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
 
@@ -77,7 +77,7 @@ For this project, we compared various techniques for face recognition.  We focus
 
 </table>
 
-<p>We tried many other combinations of similarity measures and modifying the value of <i>k</i>.  The table below shows the top 5 combinations obtained.  All the results below are for PCA only.  Since Euclidian distance was the best measurement of similarity, all the results below were obtained using Euclidian distance as the similarity measurement.</p>
+<p>We tried many other combinations of similarity measures and modifying the value of <i>k</i>.  The table below shows the top 5 combinations obtained.  All the results below are for PCA only.  Since Euclidean distance was the best measurement of similarity, all the results below were obtained using Euclidean distance as the similarity measurement.</p>
 <table class="s2" title="Top Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 
@@ -89,13 +89,13 @@ For this project, we compared various techniques for face recognition.  We focus
 
 <tr> <td>c=9,k=3,e</td>          <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
 </table>
-<p>In the table above, c=# of coefficients used, h=histogram equalization, e=edge map overlayed on image, he=histogram equalization performed, then edge map overlayed on top, k=# of neighbors examined.</p>
+<p>In the table above, c=# of coefficients used, h=histogram equalization, e=edge map overlaid on image, he=histogram equalization performed, then edge map overlaid on top, k=# of neighbors examined.</p>
 
 <p>explanation of results</p>
 
 <h2>Extension 1 Results</h2>
 <p>Below is a table showing our overall results for our testing on the aligned labelled faces in the wild image set.  This uses only the center 70x100 face portion of the image.</p>
-<table class="s2" title="Euclidian Distance Results">
+<table class="s2" title="Euclidean Distance Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.1</td>  </tr>
 
@@ -107,7 +107,7 @@ For this project, we compared various techniques for face recognition.  We focus
 
 </table>
 <p>Below is a table showing our overall results for testing the aligned labelled faces in the wild, but by training with equal-sized data sets for each subject (18 images each).  The training images for each subject were chosen at random.  Again, only the center 70x100 face portion of the image was used.</p>
-<table class="s2" title="Euclidian Distance Results">
+<table class="s2" title="Euclidean Distance Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.2</td>  </tr>
 
@@ -120,7 +120,7 @@ For this project, we compared various techniques for face recognition.  We focus
 </table>
 
 <h2>Extension 2 Results</h2>
-<p>Below is a table showing our overall results when trying using histogram equalization as a preprocessing step. The results were obtained using Euclidian distance and <i>k=1</i>.</p>
+<p>Below is a table showing our overall results when trying using histogram equalization as a preprocessing step. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
 <table class="s2" title="Histogram Equalization Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 
@@ -132,7 +132,7 @@ For this project, we compared various techniques for face recognition.  We focus
 
 </table>
 
-<p>Below is a table showing our overall results when using edge detection as a preprocessing step. The results were obtained using Euclidian distance and <i>k=1</i>.</p>
+<p>Below is a table showing our overall results when using edge detection as a preprocessing step. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
 <table class="s2" title="Edge Detection Preprocessing Results">
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 
