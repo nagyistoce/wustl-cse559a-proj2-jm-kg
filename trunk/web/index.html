@@ -128,7 +128,7 @@ For this project, we compared various techniques for face recognition.  We focus
 <p>We later realized, that maybe our results would improve if we did edge detection on the original image and then overlaid this edge map on histogram equalized image.  This differs slightly from the previous technique in that we are calculating the edge map of the <i>original</i> image and not the <i>histogram equalized</i> image.  This technique managed to improve our results in all cases except where the number of coefficients used was 9.  Similar to when we overlaid the edge map on the original image, this likely improved our results because it helped to better distinguish differences in features between faces.  See the <a href="#e2r5">Histogram Equalization with Original Edge Map Results</a> table below for results of this experiment.</p>
 
 <h3>Extension 2 Results</h3>
-<a name="e2r1"></a>
+<div id="e2r1">
 <p>Below is the table showing our overall results when using edge map as a preprocessing step. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
 <table class="s2" title="Edge Map Results">
 <caption>Edge Map Results</caption>
@@ -138,8 +138,9 @@ For this project, we compared various techniques for face recognition.  We focus
 <tr> <td>PCA 6 Coefficients</td> <td>9</td>              <td>31</td>               <td>22.5</td> </tr>
 <tr> <td>PCA 9 Coefficients</td> <td>12</td>             <td>28</td>               <td>30.0</td> </tr>
 </table>
+</div>
 
-<a name="e2r2"></a>
+<div id="e2r2">
 <p>Below is the table showing our overall results when using an edge map overlaid on the original image. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
 <table class="s2" title="Overlaid Edge Map Results">
 <caption>Overlaid Edge Map Results</caption>
@@ -149,8 +150,9 @@ For this project, we compared various techniques for face recognition.  We focus
 <tr> <td>PCA 6 Coefficients</td> <td>16</td>             <td>24</td>               <td>40.0</td> </tr>
 <tr> <td>PCA 9 Coefficients</td> <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
 </table>
+</div>
 
-<a name="e2r3"></a>
+<div id="e2r3">
 <p>Below is the table showing our overall results when using histogram equalization as a preprocessing step. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
 <table class="s2" title="Histogram Equalization Results">
 <caption>Histogram Equalization Results</caption>
@@ -160,8 +162,9 @@ For this project, we compared various techniques for face recognition.  We focus
 <tr> <td>PCA 6 Coefficients</td> <td>11</td>             <td>29</td>               <td>27.5</td> </tr>
 <tr> <td>PCA 9 Coefficients</td> <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
 </table>
+</div>
 
-<a name="e2r4"></a>
+<div id="e2r4">
 <p>Below is the table showing our overall results when using an edge map calculated from the histogram equalized image, overlaid on the histogram equalized image. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
 <table class="s2" title="Histogram Equalization with Edge Map Results">
 <caption>Histogram Equalization with Edge Map Results</caption>
@@ -171,8 +174,9 @@ For this project, we compared various techniques for face recognition.  We focus
 <tr> <td>PCA 6 Coefficients</td> <td>14</td>             <td>26</td>               <td>35.0</td> </tr>
 <tr> <td>PCA 9 Coefficients</td> <td>26</td>             <td>14</td>               <td>65.0</td> </tr>
 </table>
+</div>
 
-<a name="e2r5"></a>
+<div id="e2r5">
 <p>Below is the table showing our overall results when using an edge map calculated from the original image, overlaid on the histogram equalized image. The results were obtained using Euclidean distance and <i>k=1</i>.</p>
 <table class="s2" title="Histogram Equalization with Original Edge Map Results">
 <caption>Histogram Equalization with Original Edge Map Results</caption>
@@ -182,8 +186,9 @@ For this project, we compared various techniques for face recognition.  We focus
 <tr> <td>PCA 6 Coefficients</td> <td>21</td>             <td>19</td>               <td>52.5</td> </tr>
 <tr> <td>PCA 9 Coefficients</td> <td>26</td>             <td>14</td>               <td>65.0</td> </tr>
 </table>
+</div>
 
-<a name="e2r6"></a>
+<div id="e2r6">
 <p>We tried many combinations of similarity measures and modifying the value of <i>k</i>.  The table below shows the top 5 combinations obtained.  All the results below are for PCA only.  Since Euclidean distance was the best measurement of similarity, all the results below were obtained using Euclidean distance as the similarity measurement.</p>
 <table class="s2" title="Top Results">
 <caption>Top Results</caption>
@@ -195,6 +200,7 @@ For this project, we compared various techniques for face recognition.  We focus
 <tr> <td>c=9,k=3,e</td>          <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
 </table>
 <p>In the table above, c=# of coefficients used, h=histogram equalization, e=edge map overlaid on image, he=histogram equalization w/performed, then edge map overlaid on top, he2=histogram equalization w/performed, then the original edge map overlaid on top, k=# of neighbors examined.</p>
+</div>
 
 <hr/>
 <p><a href="http://validator.w3.org/check?uri=referer"><img
