@@ -52,9 +52,9 @@ For this project, we compared various techniques for face recognition.  We focus
 	Mahalanobis Distance (MD) performed extremely bad.  It performed as good as chance, but no better.  It's possible we implemented MD incorrectly or that MD really is just not a good measure of similarity for comparing coefficients.</li>
 </ul>
 
-<del>describe mean face algorithm</del>
-
 <p>To test our implementation we used the <a href="http://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html">AT&amp;T face database</a>.  We had two main directories: one with all the training images in it and another, with the same folder structure, which had the test faces.  For every subject/person from the original AT&amp;T face database, we randomly held back a single image from that person and placed it into the corresponding folder in the test directory.  We then read in all the files in the train set and performed PCA on set of images.  Next we read in all the faces from the test folder and, one-by-one, subtracted the mean face from the image and then projected it onto the basis images (the U matrix) and calculated its coefficients.  We then performed k-Nearest Neighbor to find the image(s) which most closely matched the ones from the test image.</p>
+
+<p>Our mean face algorithm testing was similar to the above, using the same training data and test data.  The difference is that, when we read in the training set, we averaged together the set of images for each person individually, and stored all of these mean faces in memory.  Then, when reading the test set, we simply perform Euclidean Nearest Neighbor (k-Nearest Neighbor, but with <i>k=1</i>) to find the most similar mean face to the given test face.</p>
 
 
 <h3>Initial Results</h3>
