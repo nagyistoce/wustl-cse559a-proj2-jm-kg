@@ -72,6 +72,18 @@ For this project, we compared various techniques for face recognition.  We focus
 
 <h2>Extension 1 Description</h2>
 
+<table class="s1" title="Famous Mean Faces">
+<tr>
+<td> <img src="mf-Andre_Agassi.jpg"          alt="Andre Agassi's mean face"          title="Andre Agassi's mean face"         /> </td>
+<td> <img src="mf-Angelina_Jolie.jpg"        alt="Angelina Jolie's mean face"        title="Angelina Jolie's mean face"       /> </td>
+<td> <img src="mf-Ariel_Sharon.jpg"          alt="Ariel Sharon's mean face"          title="Ariel Sharon's mean face"         /> </td>
+<td> <img src="mf-Arnold_Schwarzenegger.jpg" alt="Arnold Schwarzenegger's mean face" title="Arnold Schwarzenegger's mean face"/> </td> </tr> <tr>
+<td> <img src="mf-Bill_Clinton.jpg"          alt="Bill Clinton's mean face"          title="Bill Clinton's mean face"         /> </td>
+<td> <img src="mf-Rudolph_Giuliani.jpg"      alt="Rudolph Giuliani's mean face"      title="Rudolph Giuliani's mean face"     /> </td>
+<td> <img src="mf-Serena_Williams.jpg"       alt="Serena Williams's mean face"       title="Serena Williams's mean face"      /> </td>
+<td> <img src="mf-Winona_Ryder.jpg"          alt="Winona Ryder's mean face"          title="Winona Ryder's mean face"         /> </td>
+</tr>
+</table>
 <p>We extended the base option to work with another data set of faces; specifically, the 40-person subset of "aligned labelled faces in the wild".  We tested this data by using the full set of images as training data (with different numbers of images per person), and also by limiting the training data to 18 randomly selected images per person (such that each person has equal representation in the training data).</p>
 <p>For each of these training data options, we tried using full images (but resampled to half-size, due to computer memory constraints), and using only the face portion of the image (the 70x100 center rectangle).  Using the full images produced very poor results in all tests, so that data is not shown.  This is probably because much of the background portions of the images were evaluated in the matching, which contributes to erroneous results.  Using only the central face portion of the image produced much better results, but still markedly worse than that for the more homogeneous data set in the base option.  In fact, the best results are significantly less than half correct.  The poor results are probably due to the fact that the images vary so much more than the ones from base option.  Even with only the face portion shown, the lighting conditions are still greatly varying compared to that of base option, resulting in poor matching.</p>
 <p>Somewhat surprisingly, limiting the data set to an equal number of images per person yielded slightly worse results.  This seems to indicate that having more images for some people does not necessarily cause erroneous matches to gravitate toward them.  Rather, limiting the diversity of the training set images probably contributes to worse matches.</p>
