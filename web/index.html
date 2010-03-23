@@ -81,15 +81,15 @@ For this project, we compared various techniques for face recognition.  We focus
 <td> <img src="mf-Winona_Ryder.jpg"          alt="Winona Ryder's mean face"          title="Winona Ryder's mean face"         /> </td>
 </tr>
 </table>
-<p>We extended the base option to work with another data set of faces; specifically, the 40-person subset of "aligned labelled faces in the wild".  The images above show the results of averaging together a few images of individual famous people from this data set, resulting in faces that are notably still recognizable to humans.</p>
+<p>We extended the base option to work with another data set of faces; specifically, the 40-person subset of <a href="http://www.openu.ac.il/home/hassner/data/lfwa/">aligned labelled faces in the wild (LFW-a)</a>.  The images above show the results of averaging together a few images of individual famous people from this data set, resulting in faces that are notably still recognizable to humans.</p>
 <p>We tested this data by using the full set of images as training data (with different numbers of images per person), and also by limiting the training data to 18 randomly selected images per person (such that each person has equal representation in the training data), with both PCA recognition and mean face recognition.</p>
 <p>For each of these training data options, we tried using full images (but resampled to half-size, due to computer memory constraints), and using only the face portion of the image (the 70x100 center rectangle, highlighted in the images above).  Using the full images produced very poor results in all tests, so that data is not shown.  This is probably because much of the background portions of the images were evaluated in the matching, which contributes to erroneous results.  Using only the central face portion of the image produced much better results, but still markedly worse than that for the more homogeneous data set in the base option.  In fact, the best results are significantly less than half correct.  The poor results are probably due to the fact that the images vary so much more than the ones from base option.  Even with only the face portion shown, the lighting conditions are still greatly varying compared to that of base option, resulting in poor matching.</p>
 <p>Somewhat surprisingly, limiting the data set to an equal number of images per person yielded slightly worse results.  This seems to indicate that having more images for some people does not necessarily cause erroneous matches to gravitate toward them.  Rather, limiting the diversity of the training set images probably contributes to worse matches.</p>
 
 <h3>Extension 1 Results</h3>
 <p>Below is the table showing our overall results for our testing on the aligned labelled faces in the wild image set.  This uses only the center 70x100 face portion of the image.</p>
-<table class="s2" title="Aligned labelled faces results">
-<caption>Aligned Labelled Faces Results</caption>
+<table class="s2" title="Aligned Labelled Faces (LFW-a) Results">
+<caption>Aligned Labelled Faces (LFW-a) Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.1</td>  </tr>
 <tr> <td>PCA 4 Coefficients</td> <td>4</td>              <td>42</td>               <td>8.7</td>  </tr>
@@ -99,8 +99,8 @@ For this project, we compared various techniques for face recognition.  We focus
 </table>
 
 <p>Below is the table showing our overall results for testing the aligned labelled faces in the wild, but by training with equal-sized data sets for each subject (18 images each).  The training images for each subject were chosen at random.  Again, only the center 70x100 face portion of the image was used.</p>
-<table class="s2" title="ALF Equal Sized Sets Results">
-<caption>ALF Equal Sized Sets Results</caption>
+<table class="s2" title="LFW-a Equal Sized Sets Results">
+<caption>LFW-a Equal Sized Sets Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
 <tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.2</td>  </tr>
 <tr> <td>PCA 4 Coefficients</td> <td>3</td>              <td>43</td>               <td>6.5</td>  </tr>
