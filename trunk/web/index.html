@@ -31,6 +31,8 @@ h4{font-family: Courier New; font-size: 11pt;}
 <p>
 For this project, we compared various techniques for face recognition.  We focused our efforts on Principal Component Analysis and Mean Face comparison.  We experimented using different pre-processing techniques before performing PCA as well as testing different measures of similarity and modifying the value of <i>k</i> in k-Nearest Neighbor.</p>
 
+<p>Principal component analysis for face recognition works in the following way.  Given a set of images, find the mean image.  Subtract the mean image from each of the original images and create a two-dimensional matrix where each column represents an image and each row represents a pixel from the image.  Once the matrix has been formed, perform singular value decomposition (SVD) on this matrix.  The result is a matrix of basis images, a matrix of coefficients which define the shift in space from each basis image back to the original image minus the mean image, and a diagonal matrix which holds the weight of each of the coefficients.  It should be apparent from this that the number of coefficients obtained from SVD is the same as the number of basis images created.  A few examples of these basis images are shown at the top of this web page.  The coefficients found by PCA can then be used to perform image recognition by performing a machine learning techniques on the training set and attempting to match test images to the original training set.</p>
+
 <p>We used k-Nearest Neighbor to attempt to match a face with the subject it most closely related to.  kNN works by finding the neighbors that are "closest" to a test image and picking the neighbor that is most frequent as its best match.  The value of <i>k</i> determines how many neighbors will be analyzed when trying to pick a match.  In order for kNN to work, a measure of similarity between the test image and all training images needs to be computed.  These results are then sorted and the top <i>k</i> neighbors are chosen.  The neighbors in our algorithm are the list of images that were the closest match to the test image. Because each person has multiple images for them, we determine which person showed up most frequently, and say that is who the test image most closely matches.</p>
 
 <p>We tried four different measures of similarity before using its results to find the nearest neighbor. The similarity measures we tried using were:</p>
@@ -49,8 +51,6 @@ For this project, we compared various techniques for face recognition.  We focus
 	<li>Mahalanobis Distance (<a href="http://en.wikipedia.org/wiki/Mahalanobis_distance">info</a>)<br/><br/>
 	Mahalanobis Distance (MD) performed extremely bad.  It performed as good as chance, but no better.  It's possible we implemented MD incorrectly or that MD really is just not a good measure of similarity for comparing coefficients.</li>
 </ul>
-
-<del>describe PCA algorithm</del>
 
 <del>describe mean face algorithm</del>
 
