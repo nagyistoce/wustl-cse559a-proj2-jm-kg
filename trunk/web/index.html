@@ -33,7 +33,7 @@ For this project, we compared various techniques for face recognition.  We focus
 
 <p>Principal component analysis for face recognition works in the following way.  Given a set of images, find the mean image.  Subtract the mean image from each of the original images and create a two-dimensional matrix where each column represents an image and each row represents a pixel from the image.  Once the matrix has been formed, perform singular value decomposition (SVD) on this matrix.  The result is a matrix of basis images, a matrix of coefficients which define the shift in space from each basis image back to the original image minus the mean image, and a diagonal matrix which holds the weight of each of the coefficients.  It should be apparent from this that the number of coefficients obtained from SVD is the same as the number of basis images created.  A few examples of these basis images are shown at the top of this web page.  The coefficients found by PCA can then be used to perform image recognition by performing a machine learning techniques on the training set and attempting to match test images to the original training set.</p>
 
-<p>It is worth noting here that we initially wrote up our results and had <i>completed</i> our project until shortly after class on March 23rd.  During class, Professor Pless commented on the fact that you could combine the S and V created during SVD into a single “weighted coefficients” matrix.  Curious if this would change our results if we compared our test images against the weighted coefficients instead of the standard coefficients, we tried it out and were extremely surprised by the results.  All of our results went up significantly across the board.  Because of this, this page is our results, round 2 style.  The write-up for extension 2 was completely re-written.  You can find the original web page with our original results <a href="orig.html">over here</a>.</p>
+<p>It is worth noting here that we initially wrote up our results and had <i>completed</i> our project until shortly after class on March 23rd.  During class, Professor Pless commented on the fact that you could combine the S and V created during SVD into a single “weighted coefficients” matrix.  Curious if this would change our results if we compared our test images against the weighted coefficients instead of the standard coefficients, we tried it out and were extremely surprised by the results.  All of our results for the ATT data set went up significantly across the board.  However, our results for the ORL data set were mixed.  Because of this, this page is our results, round 2 style.  The write-up for the extension 2 section was completely re-written.  You can find the original web page with our original results <a href="orig.html">over here</a>.</p>
 
 <p>We used k-Nearest Neighbor to attempt to match a face with the subject it most closely related to.  kNN works by finding the neighbors that are "closest" to a test image and picking the neighbor that is most frequent as its best match.  The value of <i>k</i> determines how many neighbors will be analyzed when trying to pick a match.  In order for kNN to work, a measure of similarity between the test image and all training images needs to be computed.  These results are then sorted and the top <i>k</i> neighbors are chosen.  The neighbors in our algorithm are the list of images that were the closest match to the test image. Because each person has multiple images for them, we determine which person showed up most frequently, and say that is who the test image most closely matches.</p>
 
@@ -93,10 +93,10 @@ For this project, we compared various techniques for face recognition.  We focus
 <table class="s2" title="Aligned Labelled Faces (LFW-a) Results">
 <caption>Aligned Labelled Faces (LFW-a) Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.1</td>  </tr>
-<tr> <td>PCA 4 Coefficients</td> <td>4</td>              <td>42</td>               <td>8.7</td>  </tr>
-<tr> <td>PCA 6 Coefficients</td> <td>4</td>              <td>42</td>               <td>8.7</td>  </tr>
-<tr> <td>PCA 9 Coefficients</td> <td>6</td>              <td>40</td>               <td>13.0</td> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>0</td>              <td>46</td>               <td>0.0</td>  </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>0</td>              <td>46</td>               <td>0.0</td>  </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>2</td>              <td>44</td>               <td>4.4</td>  </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>8</td>              <td>38</td>               <td>17.3</td> </tr>
 <tr> <td>Mean Face</td>          <td>18</td>             <td>28</td>               <td>39.1</td> </tr>
 </table>
 
@@ -104,10 +104,10 @@ For this project, we compared various techniques for face recognition.  We focus
 <table class="s2" title="LFW-a Equal Sized Sets Results">
 <caption>LFW-a Equal Sized Sets Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>PCA 2 Coefficients</td> <td>1</td>              <td>45</td>               <td>2.2</td>  </tr>
-<tr> <td>PCA 4 Coefficients</td> <td>3</td>              <td>43</td>               <td>6.5</td>  </tr>
-<tr> <td>PCA 6 Coefficients</td> <td>3</td>              <td>43</td>               <td>6.5</td>  </tr>
-<tr> <td>PCA 9 Coefficients</td> <td>6</td>              <td>40</td>               <td>13.0</td> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>2</td>              <td>44</td>               <td>4.4</td>  </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>40</td>               <td>13.0</td>  </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>5</td>              <td>41</td>               <td>10.9</td>  </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>9</td>              <td>37</td>               <td>19.6</td> </tr>
 <tr> <td>Mean Face</td>          <td>16</td>             <td>30</td>               <td>34.8</td> </tr>
 </table>
 
