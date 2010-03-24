@@ -14,5 +14,8 @@ fmatrix2 = fmatrix - repmat(fmean,1,size(fmatrix,2));
 % D = USV
 [U S V] = svds(fmatrix2,num_coeffs);
 
+% add the weights into the coefficients (make them 'weighted' coefficients).
+V = (S*V')';
+
 end
 
