@@ -33,6 +33,8 @@ For this project, we compared various techniques for face recognition.  We focus
 
 <p>Principal component analysis for face recognition works in the following way.  Given a set of images, find the mean image.  Subtract the mean image from each of the original images and create a two-dimensional matrix where each column represents an image and each row represents a pixel from the image.  Once the matrix has been formed, perform singular value decomposition (SVD) on this matrix.  The result is a matrix of basis images, a matrix of coefficients which define the shift in space from each basis image back to the original image minus the mean image, and a diagonal matrix which holds the weight of each of the coefficients.  It should be apparent from this that the number of coefficients obtained from SVD is the same as the number of basis images created.  A few examples of these basis images are shown at the top of this web page.  The coefficients found by PCA can then be used to perform image recognition by performing a machine learning techniques on the training set and attempting to match test images to the original training set.</p>
 
+<p>It is worth noting here that we initially wrote up our results and had <i>completed</i> our project until shortly after class on March 23rd.  During class, Professor Pless commented on the fact that you could combine the S and V created during SVD into a single “weighted coefficients” matrix.  Curious if this would change our results if we compared our test images against the weighted coefficients instead of the standard coefficients, we tried it out and were extremely surprised by the results.  All of our results went up significantly across the board.  Because of this, this page is our results, round 2 style.  The write-up for extension 2 was completely re-written.  You can find the original web page with our original results <a href="orig.html">over here</a>.</p>
+
 <p>We used k-Nearest Neighbor to attempt to match a face with the subject it most closely related to.  kNN works by finding the neighbors that are "closest" to a test image and picking the neighbor that is most frequent as its best match.  The value of <i>k</i> determines how many neighbors will be analyzed when trying to pick a match.  In order for kNN to work, a measure of similarity between the test image and all training images needs to be computed.  These results are then sorted and the top <i>k</i> neighbors are chosen.  The neighbors in our algorithm are the list of images that were the closest match to the test image. Because each person has multiple images for them, we determine which person showed up most frequently, and say that is who the test image most closely matches.</p>
 
 <p>We tried four different measures of similarity before using its results to find the nearest neighbor. The similarity measures we tried using were:</p>
@@ -63,10 +65,10 @@ For this project, we compared various techniques for face recognition.  We focus
 <table class="s2" title="Euclidean Distance Results">
 <caption>Initial Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>PCA 2 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
-<tr> <td>PCA 4 Coefficients</td> <td>11</td>             <td>29</td>               <td>27.5</td> </tr>
-<tr> <td>PCA 6 Coefficients</td> <td>14</td>             <td>26</td>               <td>35.0</td> </tr>
-<tr> <td>PCA 9 Coefficients</td> <td>23</td>             <td>17</td>               <td>57.5</td> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>13</td>             <td>27</td>               <td>32.5</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>33</td>             <td>7</td>                <td>82.5</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>38</td>             <td>2</td>                <td>95.0</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>39</td>             <td>1</td>                <td>97.5</td> </tr>
 <tr> <td>Mean Face</td>          <td>39</td>             <td>1</td>                <td>97.5</td> </tr>
 </table>
 
@@ -133,10 +135,10 @@ For this project, we compared various techniques for face recognition.  We focus
 <table class="s2" title="Edge Map Results">
 <caption>Edge Map Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td>10.0</td> </tr>
-<tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
-<tr> <td>PCA 6 Coefficients</td> <td>9</td>              <td>31</td>               <td>22.5</td> </tr>
-<tr> <td>PCA 9 Coefficients</td> <td>12</td>             <td>28</td>               <td>30.0</td> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>2</td>              <td>38</td>               <td>5.0</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>5</td>              <td>35</td>               <td>12.5</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>12</td>             <td>28</td>               <td>30.0</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>13</td>             <td>27</td>               <td>32.5</td> </tr>
 </table>
 </div>
 
@@ -145,10 +147,10 @@ For this project, we compared various techniques for face recognition.  We focus
 <table class="s2" title="Overlaid Edge Map Results">
 <caption>Overlaid Edge Map Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td>10.0</td> </tr>
-<tr> <td>PCA 4 Coefficients</td> <td>12</td>             <td>28</td>               <td>30.0</td> </tr>
-<tr> <td>PCA 6 Coefficients</td> <td>16</td>             <td>24</td>               <td>40.0</td> </tr>
-<tr> <td>PCA 9 Coefficients</td> <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>17</td>             <td>23</td>               <td>42.5</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>27</td>             <td>13</td>               <td>67.5</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>35</td>             <td>5</td>                <td></td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>37</td>             <td>3</td>                <td>92.5</td> </tr>
 </table>
 </div>
 
@@ -157,10 +159,10 @@ For this project, we compared various techniques for face recognition.  We focus
 <table class="s2" title="Histogram Equalization Results">
 <caption>Histogram Equalization Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td>10.0</td> </tr>
-<tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
-<tr> <td>PCA 6 Coefficients</td> <td>11</td>             <td>29</td>               <td>27.5</td> </tr>
-<tr> <td>PCA 9 Coefficients</td> <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>10</td>             <td>30</td>               <td>25.0</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>28</td>             <td>12</td>               <td>70.0</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>33</td>             <td>7</td>                <td>82.5</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>34</td>             <td>6</td>                <td>85.0</td> </tr>
 </table>
 </div>
 
@@ -169,10 +171,10 @@ For this project, we compared various techniques for face recognition.  We focus
 <table class="s2" title="Histogram Equalization with Edge Map Results">
 <caption>Histogram Equalization with Edge Map Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>PCA 2 Coefficients</td> <td>2</td>              <td>38</td>               <td>5.0</td> </tr>
-<tr> <td>PCA 4 Coefficients</td> <td>6</td>              <td>34</td>               <td>15.0</td> </tr>
-<tr> <td>PCA 6 Coefficients</td> <td>14</td>             <td>26</td>               <td>35.0</td> </tr>
-<tr> <td>PCA 9 Coefficients</td> <td>26</td>             <td>14</td>               <td>65.0</td> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>7</td>              <td>33</td>               <td>17.5</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>28</td>             <td>12</td>               <td>70.0</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>34</td>             <td>6</td>                <td>85.0</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>35</td>             <td>5</td>                <td>87.5</td> </tr>
 </table>
 </div>
 
@@ -181,10 +183,10 @@ For this project, we compared various techniques for face recognition.  We focus
 <table class="s2" title="Histogram Equalization with Original Edge Map Results">
 <caption>Histogram Equalization with Original Edge Map Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>PCA 2 Coefficients</td> <td>4</td>              <td>36</td>               <td>10.0</td> </tr>
-<tr> <td>PCA 4 Coefficients</td> <td>10</td>             <td>30</td>               <td>25.0</td> </tr>
-<tr> <td>PCA 6 Coefficients</td> <td>21</td>             <td>19</td>               <td>52.5</td> </tr>
-<tr> <td>PCA 9 Coefficients</td> <td>26</td>             <td>14</td>               <td>65.0</td> </tr>
+<tr> <td>PCA 2 Coefficients</td> <td>10</td>             <td>30</td>               <td>25.0</td> </tr>
+<tr> <td>PCA 4 Coefficients</td> <td>23</td>             <td>17</td>               <td>57.5</td> </tr>
+<tr> <td>PCA 6 Coefficients</td> <td>32</td>             <td>8</td>                <td>80.0</td> </tr>
+<tr> <td>PCA 9 Coefficients</td> <td>36</td>             <td>4</td>                <td>85.0</td> </tr>
 </table>
 </div>
 
@@ -193,11 +195,11 @@ For this project, we compared various techniques for face recognition.  We focus
 <table class="s2" title="Top Results">
 <caption>Top Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
-<tr> <td>c=9,k=1,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
-<tr> <td>c=9,k=3,h</td>          <td>29</td>             <td>11</td>               <td>72.5</td> </tr>
-<tr> <td>c=9,k=3,he</td>         <td>26</td>             <td>14</td>               <td>65.0</td> </tr>
-<tr> <td>c=9,k=1,he2</td>        <td>26</td>             <td>14</td>               <td>65.0</td> </tr>
-<tr> <td>c=9,k=3,e</td>          <td>24</td>             <td>16</td>               <td>60.0</td> </tr>
+<tr> <td>c=9,k=1,h</td>          <td></td>             <td></td>               <td></td> </tr>
+<tr> <td>c=9,k=3,h</td>          <td></td>             <td></td>               <td></td> </tr>
+<tr> <td>c=9,k=3,he</td>         <td></td>             <td></td>               <td></td> </tr>
+<tr> <td>c=9,k=1,he2</td>        <td></td>             <td></td>               <td></td> </tr>
+<tr> <td>c=9,k=3,e</td>          <td></td>             <td></td>               <td></td> </tr>
 </table>
 <p>In the table above, c=# of coefficients used, h=histogram equalization, e=edge map overlaid on image, he=histogram equalization w/performed, then edge map overlaid on top, he2=histogram equalization w/performed, then the original edge map overlaid on top, k=# of neighbors examined.</p>
 </div>
