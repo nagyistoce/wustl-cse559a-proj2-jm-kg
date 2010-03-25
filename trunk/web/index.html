@@ -89,7 +89,7 @@ For this project, we compared various techniques for face recognition.  We focus
 <p>Somewhat surprisingly, limiting the data set to an equal number of images per person yielded slightly worse results.  This seems to indicate that having more images for some people does not necessarily cause erroneous matches to gravitate toward them.  Rather, limiting the diversity of the training set images probably contributes to worse matches.</p>
 
 <h3>Extension 1 Results</h3>
-<p>Below is the table showing our overall results for our testing on the aligned labelled faces in the wild image set.  This uses only the center 70x100 face portion of the image.</p>
+<p>Below is the table showing our overall results for our testing on the aligned labelled faces in the wild image set.  This uses only the center 70x100 face portion of the image, with <i>k=1</i>.</p>
 <table class="s2" title="Aligned Labelled Faces (LFW-a) Results">
 <caption>Aligned Labelled Faces (LFW-a) Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
@@ -100,7 +100,7 @@ For this project, we compared various techniques for face recognition.  We focus
 <tr> <td>Mean Face</td>          <td>18</td>             <td>28</td>               <td>39.1</td> </tr>
 </table>
 
-<p>Below is the table showing our overall results for testing the aligned labelled faces in the wild, but by training with equal-sized data sets for each subject (18 images each).  The training images for each subject were chosen at random.  Again, only the center 70x100 face portion of the image was used.</p>
+<p>Below is the table showing our overall results for testing the aligned labelled faces in the wild, but by training with equal-sized data sets for each subject (18 images each).  The training images for each subject were chosen at random.  Again, only the center 70x100 face portion of the image was used, with <i>k=1</i>.</p>
 <table class="s2" title="LFW-a Equal Sized Sets Results">
 <caption>LFW-a Equal Sized Sets Results</caption>
 <tr> <th>Method</th>             <th>Correct</th>        <th>Incorrect</th>        <th>% Correct</th> </tr>
